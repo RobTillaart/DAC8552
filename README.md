@@ -27,6 +27,7 @@ since 0.2.0 the slaveSelect pin needs to be defined.
 - **uint16_t getValue(uint8_t DAC)**returns the last value written.
 
 ### Power down
+
 check datasheet for details.
 
 - **void bufferPowerDown(uint8_t DAC, uint8_t powerDownMode)**
@@ -35,10 +36,10 @@ check datasheet for details.
 
 | Power down mode         | Value |
 |:------------------------|:-----:|
-| DAC8551_POWERDOWN_NORMAL   | 0 |
-| DAC8551_POWERDOWN_1K       | 1 |
-| DAC8551_POWERDOWN_100K     | 2 |
-| DAC8551_POWERDOWN_HIGH_IMP | 3 |
+| DAC8552_POWERDOWN_NORMAL   | 0 |
+| DAC8552_POWERDOWN_1K       | 1 |
+| DAC8552_POWERDOWN_100K     | 2 |
+| DAC8552_POWERDOWN_HIGH_IMP | 3 |
 
 
 ## Operation
