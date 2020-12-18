@@ -2,15 +2,15 @@
 //    FILE: DAC8552_same_time_write.ino
 //  AUTHOR: Rob Tillaart
 // PURPOSE: demo DAC8552 library Arduino with hardware SPI
-// VERSION: 0.1.1
+// VERSION: 0.2.0
 //     URL: https://github.com/RobTillaart/DAC8552
 //
 
-#include <SPI.h>
+
 #include "DAC8552.h"
 
 // HW SPI
-DAC8552 DAC;
+DAC8552 DAC(10);
 
 uint32_t lastTime = 0;
 uint16_t state = 0;

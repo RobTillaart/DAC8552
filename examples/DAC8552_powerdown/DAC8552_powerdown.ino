@@ -6,11 +6,11 @@
 //     URL: https://github.com/RobTillaart/DAC8552
 //
 
-#include <SPI.h>
+
 #include "DAC8552.h"
 
 //  HW SPI
-DAC8552 DAC;
+DAC8552 DAC(10);
 
 uint8_t chanA = 0;
 uint8_t chanB = 1;

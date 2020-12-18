@@ -2,25 +2,27 @@
 //    FILE: DAC8552.cpp 
 //  AUTHOR: Rob Tillaart
 // PURPOSE: Arduino library for DAC8552 SPI Digital Analog Convertor
-// VERSION: 0.1.3
+// VERSION: 0.2.0
 //     URL: https://github.com/RobTillaart/DAC8552
 //
 // HISTORY:
-//   0.1.0: 2017-12-14 initial version
-//   0.1.1: 2017-12-19 fix begin() bug
-//   0.1.2  2020-04-06 minor refactor, readme.md
-//   0.1.3  2020-06-07 fix library.json
+//   0.1.0: 2017-12-14  initial version
+//   0.1.1: 2017-12-19  fix begin() bug
+//   0.1.2  2020-04-06  minor refactor, readme.md
+//   0.1.3  2020-06-07  fix library.json
+//   0.2.0  2020-12-18  add arduino-ci + unit test
+//                      add slave select pin for HW constructor
 
 
-#include <SPI.h>
-#include <DAC8552.h>
+#include "DAC8552.h"
 
 #define MAXVOLTAGE  5.0
 #define MAXVALUE    0xFFFF
 
-DAC8552::DAC8552()
+DAC8552::DAC8552(uint8_t slaveSelect)
 {
   _hwSPI = true;
+  _slaveSelect = slaveSelect;
 }
 
 DAC8552::DAC8552(uint8_t spiData, uint8_t spiClock, uint8_t slaveSelect)
@@ -35,6 +37,9 @@ DAC8552::DAC8552(uint8_t spiData, uint8_t spiClock, uint8_t slaveSelect)
 // and sets internal state
 void DAC8552::begin()
 {
+  pinMode(_slaveSelect, OUTPUT);
+  digitalWrite(_slaveSelect, HIGH);
+
   if(_hwSPI)
   {
     SPI.begin();
@@ -44,8 +49,6 @@ void DAC8552::begin()
   {
     pinMode(_spiData, OUTPUT);
     pinMode(_spiClock, OUTPUT);
-    pinMode(_slaveSelect, OUTPUT);
-    digitalWrite(_slaveSelect, HIGH);
     digitalWrite(_spiData, LOW);
     digitalWrite(_spiClock, LOW);
   }
@@ -100,7 +103,7 @@ uint8_t DAC8552::getPowerDownMode(uint8_t DAC)
 }
 
 // DAC = 0, 1, 2, 3 depending on type
-// direct = true ==> write buffers to both DAC A and DAC B
+// direct = true  ==> write buffers to both DAC A and DAC B
 // direct = false ==> buffer value
 void DAC8552::updateDevice(uint8_t DAC, bool directWrite)
 {
