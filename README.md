@@ -22,18 +22,18 @@ The DAC8552 is a SPI based 16 bit DAC with two channels.
 since 0.2.0 the slaveSelect pin needs to be defined.
 - **DAC8552(uint8_t spiData, uint8_t spiClock, uint8_t slaveSelect)** Constructor for the software SPI
 - **void begin()** initializes all pins to default state
-- **void bufferValue(uint8_t DAC, uint16_t value)**
-- **void setValue(uint8_t DAC, uint16_t value)** set the value of the chosen channel to 0 - 65535
-- **uint16_t getValue(uint8_t DAC)**returns the last value written.
+- **void bufferValue(uint8_t channel, uint16_t value)**
+- **void setValue(uint8_t channel, uint16_t value)** set the value of the chosen channel to 0 - 65535
+- **uint16_t getValue(uint8_t channel)**returns the last value written.
 
 ### Power down
 
 Check datasheet for details.
 
-- **void bufferPowerDown(uint8_t DAC, uint8_t powerDownMode)** ets power down mode. 0 - 3, 
+- **void bufferPowerDown(uint8_t channel, uint8_t powerDownMode)** ets power down mode. 0 - 3, 
 but waits until (TODO CHECK DATASHEET)
-- **void setPowerDown(uint8_t DAC, uint8_t powerDownMode)** sets power down mode. 0 - 3.
-- **uint8_t getPowerDownMode(uint8_t DAC)** returns last written mode.
+- **void setPowerDown(uint8_t channel, uint8_t powerDownMode)** sets power down mode. 0 - 3.
+- **uint8_t getPowerDownMode(uint8_t channel)** returns last written mode.
 
 | Power down mode         | Value |
 |:------------------------|:-----:|
