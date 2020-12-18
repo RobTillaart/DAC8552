@@ -60,54 +60,54 @@ void DAC8552::begin()
   }
 }
 
-// DAC = 0, 1, 2, 3 depending on type
+// channel = 0, 1, 2, 3 depending on type
 // value = 0..65535
-void DAC8552::bufferValue(uint8_t DAC, uint16_t value)
+void DAC8552::bufferValue(uint8_t channel, uint16_t value)
 {
-  _value[DAC] = value;
-  updateDevice(DAC, false);
+  _value[channel] = value;
+  updateDevice(channel, false);
 }
 
-// DAC = 0, 1, 2, 3 depending on type
+// channel = 0, 1, 2, 3 depending on type
 // value = 0..65535
-void DAC8552::setValue(uint8_t DAC, uint16_t value)
+void DAC8552::setValue(uint8_t channel, uint16_t value)
 {
-  _value[DAC] = value;
-  updateDevice(DAC, true);
+  _value[channel] = value;
+  updateDevice(channel, true);
 }
 
-// DAC = 0, 1, 2, 3 depending on type
+// channel = 0, 1, 2, 3 depending on type
 // returns 0..65535
-uint16_t DAC8552::getValue(uint8_t DAC)
+uint16_t DAC8552::getValue(uint8_t channel)
 {
-  return _value[DAC];
+  return _value[channel];
 }
 
-void DAC8552::bufferPowerDown(uint8_t DAC, uint8_t powerDownMode)
+void DAC8552::bufferPowerDown(uint8_t channel, uint8_t powerDownMode)
 {
-  _register[DAC] &= 0xFC;
-  _register[DAC] |= powerDownMode;
-  updateDevice(DAC, false);
+  _register[channel] &= 0xFC;
+  _register[channel] |= powerDownMode;
+  updateDevice(channel, false);
 }
 
-void DAC8552::setPowerDown(uint8_t DAC, uint8_t powerDownMode)
+void DAC8552::setPowerDown(uint8_t channel, uint8_t powerDownMode)
 {
-  _register[DAC] &= 0xFC;
-  _register[DAC] |= powerDownMode;
-  updateDevice(DAC, true);
+  _register[channel] &= 0xFC;
+  _register[channel] |= powerDownMode;
+  updateDevice(channel, true);
 }
 
-uint8_t DAC8552::getPowerDownMode(uint8_t DAC)
+uint8_t DAC8552::getPowerDownMode(uint8_t channel)
 {
-  return _register[DAC] & 0x03;
+  return _register[channel] & 0x03;
 }
 
-// DAC = 0, 1, 2, 3 depending on type
-// direct = true  ==> write buffers to both DAC A and DAC B
+// channel = 0, 1, 2, 3 depending on type
+// direct = true  ==> write buffers to both channel A and channel B
 // direct = false ==> buffer value
-void DAC8552::updateDevice(uint8_t DAC, bool directWrite)
+void DAC8552::updateDevice(uint8_t channel, bool directWrite)
 {
-  uint8_t configRegister = _register[DAC];
+  uint8_t configRegister = _register[channel];
   if (directWrite) configRegister |= 0x30;
 
   if (_hwSPI)
@@ -115,8 +115,8 @@ void DAC8552::updateDevice(uint8_t DAC, bool directWrite)
     SPI.beginTransaction(SPISettings(16000000, MSBFIRST, SPI_MODE1));
     digitalWrite(_slaveSelect, LOW);
     SPI.transfer(configRegister);
-    SPI.transfer(_value[DAC] >> 8);
-    SPI.transfer(_value[DAC] & 0xFF);
+    SPI.transfer(_value[channel] >> 8);
+    SPI.transfer(_value[channel] & 0xFF);
     digitalWrite(_slaveSelect, HIGH);
     SPI.endTransaction();
   }
@@ -124,8 +124,8 @@ void DAC8552::updateDevice(uint8_t DAC, bool directWrite)
   {
     digitalWrite(_slaveSelect, LOW);
     swSPI_transfer(configRegister);
-    swSPI_transfer(_value[DAC] >> 8);
-    swSPI_transfer(_value[DAC] & 0xFF);
+    swSPI_transfer(_value[channel] >> 8);
+    swSPI_transfer(_value[channel] & 0xFF);
     digitalWrite(_slaveSelect, HIGH);
   }
 }

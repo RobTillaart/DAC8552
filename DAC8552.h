@@ -25,13 +25,13 @@ public:
 
   void     begin();
 
-  void     bufferValue(uint8_t DAC, uint16_t value);
-  void     setValue(uint8_t DAC, uint16_t value);
-  uint16_t getValue(uint8_t DAC);
+  void     bufferValue(uint8_t channel, uint16_t value);
+  void     setValue(uint8_t channel, uint16_t value);
+  uint16_t getValue(uint8_t channel);
 
-  void     bufferPowerDown(uint8_t DAC, uint8_t powerDownMode);
-  void     setPowerDown(uint8_t DAC, uint8_t powerDownMode);
-  uint8_t  getPowerDownMode(uint8_t DAC);
+  void     bufferPowerDown(uint8_t channel, uint8_t powerDownMode);
+  void     setPowerDown(uint8_t channel, uint8_t powerDownMode);
+  uint8_t  getPowerDownMode(uint8_t channel);
 
 
 private:
@@ -42,7 +42,7 @@ private:
   uint16_t _value[2];
   uint8_t  _register[2];
 
-  void     updateDevice(uint8_t DAC, bool directWrite);
+  void     updateDevice(uint8_t channel, bool directWrite);
   void     swSPI_transfer(uint8_t value);
 };
 
