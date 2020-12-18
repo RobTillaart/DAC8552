@@ -10,7 +10,7 @@
 #include "DAC8552.h"
 
 // HW SPI
-DAC8552 DAC(10);
+DAC8552 mydac(10);
 
 uint32_t lastTime = 0;
 uint16_t state = 0;
@@ -20,7 +20,7 @@ void setup()
   Serial.begin(115200);
   Serial.println(__FILE__);
   Serial.println(DAC8552_LIB_VERSION);
-  DAC.begin();
+  mydac.begin();
 }
 
 void loop()
@@ -37,14 +37,14 @@ void loop()
     if (state == 0)
     {
       state = 1;
-      DAC.setValue(chanA, 0);
-      DAC.setValue(chanB, 65535);
+      mydac.setValue(chanA, 0);
+      mydac.setValue(chanB, 65535);
     }
     else
     {
       state = 0;
-      DAC.setValue(chanB, 0);
-      DAC.setValue(chanA, 65535);
+      mydac.setValue(chanB, 0);
+      mydac.setValue(chanA, 65535);
     }
   }
 }
