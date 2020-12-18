@@ -33,7 +33,7 @@ void loop()
     Serial.print(val);
     Serial.print("\t ==> \t");
     Serial.print(av);
-	if (val % 300 == 0) Serial.println();
+    if (val % 300 == 0) Serial.println();
   }
   Serial.println();
 
@@ -47,7 +47,7 @@ void loop()
     Serial.print("\t ==> \t");
     Serial.print(av);
     delay(100);
-	if (i % 30 == 0) Serial.println();
+    if (i % 30 == 0) Serial.println();
   }
   Serial.println();
 
