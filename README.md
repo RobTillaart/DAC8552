@@ -28,9 +28,10 @@ since 0.2.0 the slaveSelect pin needs to be defined.
 
 ### Power down
 
-check datasheet for details.
+Check datasheet for details.
 
-- **void bufferPowerDown(uint8_t DAC, uint8_t powerDownMode)**
+- **void bufferPowerDown(uint8_t DAC, uint8_t powerDownMode)** ets power down mode. 0 - 3, 
+but waits until (TODO CHECK DATASHEET)
 - **void setPowerDown(uint8_t DAC, uint8_t powerDownMode)** sets power down mode. 0 - 3.
 - **uint8_t getPowerDownMode(uint8_t DAC)** returns last written mode.
 

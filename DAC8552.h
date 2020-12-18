@@ -42,7 +42,6 @@ private:
   uint16_t _value[2];
   uint8_t  _register[2];
 
-
   void     updateDevice(uint8_t DAC, bool directWrite);
   void     swSPI_transfer(uint8_t value);
 };
