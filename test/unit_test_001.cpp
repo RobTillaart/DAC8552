@@ -42,28 +42,20 @@ unittest(test_HW_constructor)
   DAC8552 mydac(10);
   mydac.begin();
 
-  uint8_t channel = 0;
-  fprintf(stderr, "CHANNEL %d\n", channel);
-  for (uint16_t val = 0; val < 65500; val += 30)
+  for (uint8_t channel = 0; channel < 2; channel++)
   {
-    mydac.setValue(channel, val);
-    if (mydac.getValue(channel) != val)
+    fprintf(stderr, "CHANNEL %d\n", channel);
+    for (uint16_t val = 0; val < 65500; val += 30)
     {
-      fprintf(stderr, "%d -> %d\n", val, mydac.getValue(channel));
+      mydac.setValue(channel, val);
+      if (mydac.getValue(channel) != val)
+      {
+        fprintf(stderr, "%d -> %d\n", val, mydac.getValue(channel));
+      }
     }
+    mydac.setValue(channel, 100);
+    assertEqual(100, mydac.getValue(channel));
   }
-  channel = 1;
-  fprintf(stderr, "CHANNEL %d\n", channel);
-  for (uint16_t val = 0; val < 65500; val += 30)
-  {
-    mydac.setValue(channel, val);
-    if (mydac.getValue(channel) != val)
-    {
-      fprintf(stderr, "%d -> %d\n", val, mydac.getValue(channel));
-    }
-  }
-  mydac.setValue(100);
-  assertEqual(100, mydac.getValue());
 }
 
 
@@ -72,28 +64,20 @@ unittest(test_SW_constructor)
   DAC8552 mydac(4, 5, 6);
   mydac.begin();
   
-  uint8_t channel = 0;
-  fprintf(stderr, "CHANNEL %d\n", channel);
-  for (uint16_t val = 0; val < 65500; val += 30)
+  for (uint8_t channel = 0; channel < 2; channel++)
   {
-    mydac.setValue(channel, val);
-    if (mydac.getValue(channel) != val)
+    fprintf(stderr, "CHANNEL %d\n", channel);
+    for (uint16_t val = 0; val < 65500; val += 30)
     {
-      fprintf(stderr, "%d -> %d\n", val, mydac.getValue(channel));
+      mydac.setValue(channel, val);
+      if (mydac.getValue(channel) != val)
+      {
+        fprintf(stderr, "%d -> %d\n", val, mydac.getValue(channel));
+      }
     }
+    mydac.setValue(channel, 100);
+    assertEqual(100, mydac.getValue(channel));
   }
-  channel = 1;
-  fprintf(stderr, "CHANNEL %d\n", channel);
-  for (uint16_t val = 0; val < 65500; val += 30)
-  {
-    mydac.setValue(channel, val);
-    if (mydac.getValue(channel) != val)
-    {
-      fprintf(stderr, "%d -> %d\n", val, mydac.getValue(channel));
-    }
-  }
-  mydac.setValue(100);
-  assertEqual(100, mydac.getValue());
 }
 
 
@@ -103,16 +87,16 @@ unittest(test_powerDown)
   mydac.begin();
   
   mydac.setPowerDown(DAC8552_POWERDOWN_NORMAL);
-  assertEqual(DAC8551_POWERDOWN_NORMAL, mydac.getPowerDownMode());
+  assertEqual(DAC8552_POWERDOWN_NORMAL, mydac.getPowerDownMode());
   
   mydac.setPowerDown(DAC8552_POWERDOWN_1K);
-  assertEqual(DAC8551_POWERDOWN_1K, mydac.getPowerDownMode());
+  assertEqual(DAC8552_POWERDOWN_NORMAL, mydac.getPowerDownMode());
   
   mydac.setPowerDown(DAC8552_POWERDOWN_100K);
-  assertEqual(DAC8551_POWERDOWN_100K, mydac.getPowerDownMode());
+  assertEqual(DAC8552_POWERDOWN_NORMAL, mydac.getPowerDownMode());
   
   mydac.setPowerDown(DAC8552_POWERDOWN_HIGH_IMP);
-  assertEqual(DAC8551_POWERDOWN_HIGH_IMP, mydac.getPowerDownMode());
+  assertEqual(DAC8552_POWERDOWN_NORMAL, mydac.getPowerDownMode());
 }
 
 
