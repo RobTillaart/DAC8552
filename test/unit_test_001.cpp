@@ -90,17 +90,17 @@ unittest(test_powerDown)
   for (uint8_t channel = 0; channel < 2; channel++)
   {
     fprintf(stderr, "CHANNEL %d\n", channel);
-    mydac.setPowerDown(DAC8552_POWERDOWN_NORMAL);
-    assertEqual(DAC8552_POWERDOWN_NORMAL, mydac.getPowerDownMode());
+    mydac.setPowerDown(channel, DAC8552_POWERDOWN_NORMAL);
+    assertEqual(DAC8552_POWERDOWN_NORMAL, mydac.getPowerDownMode(channel));
 
-    mydac.setPowerDown(DAC8552_POWERDOWN_1K);
-    assertEqual(DAC8552_POWERDOWN_NORMAL, mydac.getPowerDownMode());
+    mydac.setPowerDown(channel, DAC8552_POWERDOWN_1K);
+    assertEqual(DAC8552_POWERDOWN_1K, mydac.getPowerDownMode(channel));
 
-    mydac.setPowerDown(DAC8552_POWERDOWN_100K);
-    assertEqual(DAC8552_POWERDOWN_NORMAL, mydac.getPowerDownMode());
+    mydac.setPowerDown(channel, DAC8552_POWERDOWN_100K);
+    assertEqual(DAC8552_POWERDOWN_100K, mydac.getPowerDownMode(channel));
 
-    mydac.setPowerDown(DAC8552_POWERDOWN_HIGH_IMP);
-    assertEqual(DAC8552_POWERDOWN_NORMAL, mydac.getPowerDownMode());
+    mydac.setPowerDown(channel, DAC8552_POWERDOWN_HIGH_IMP);
+    assertEqual(DAC8552_POWERDOWN_HIGH_IMP, mydac.getPowerDownMode(channel));
   }
 }
 
