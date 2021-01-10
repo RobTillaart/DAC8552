@@ -8,11 +8,13 @@
 
 Arduino library for DAC8552 SPI Digital Analog Convertor
 
+
 ## Description
 
-**Warning** not tested extensively
-
 The DAC8552 is a SPI based 16 bit DAC with two channels.
+
+**Warning** This library is not tested extensively
+
 
 ## Interface
 
@@ -25,6 +27,7 @@ since 0.2.0 the slaveSelect pin needs to be defined.
 - **void bufferValue(uint8_t channel, uint16_t value)**
 - **void setValue(uint8_t channel, uint16_t value)** set the value of the chosen channel to 0 - 65535
 - **uint16_t getValue(uint8_t channel)**returns the last value written.
+
 
 ### Power down
 
@@ -63,6 +66,7 @@ See examples
 
 **demo_powerdown.ino**
 - idem
+
 
 ## TODO
 
