@@ -21,7 +21,6 @@
 #define DAC8552_POWERDOWN_HIGH_IMP    3
 
 
-
 class DAC8552
 {
 public:

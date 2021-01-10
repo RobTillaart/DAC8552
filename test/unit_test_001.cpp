@@ -32,6 +32,7 @@ unittest_setup()
 {
 }
 
+
 unittest_teardown()
 {
 }
@@ -86,17 +87,21 @@ unittest(test_powerDown)
   DAC8552 mydac(4, 5, 6);
   mydac.begin();
   
-  mydac.setPowerDown(DAC8552_POWERDOWN_NORMAL);
-  assertEqual(DAC8552_POWERDOWN_NORMAL, mydac.getPowerDownMode());
-  
-  mydac.setPowerDown(DAC8552_POWERDOWN_1K);
-  assertEqual(DAC8552_POWERDOWN_NORMAL, mydac.getPowerDownMode());
-  
-  mydac.setPowerDown(DAC8552_POWERDOWN_100K);
-  assertEqual(DAC8552_POWERDOWN_NORMAL, mydac.getPowerDownMode());
-  
-  mydac.setPowerDown(DAC8552_POWERDOWN_HIGH_IMP);
-  assertEqual(DAC8552_POWERDOWN_NORMAL, mydac.getPowerDownMode());
+  for (uint8_t channel = 0; channel < 2; channel++)
+  {
+    fprintf(stderr, "CHANNEL %d\n", channel);
+    mydac.setPowerDown(DAC8552_POWERDOWN_NORMAL);
+    assertEqual(DAC8552_POWERDOWN_NORMAL, mydac.getPowerDownMode());
+
+    mydac.setPowerDown(DAC8552_POWERDOWN_1K);
+    assertEqual(DAC8552_POWERDOWN_NORMAL, mydac.getPowerDownMode());
+
+    mydac.setPowerDown(DAC8552_POWERDOWN_100K);
+    assertEqual(DAC8552_POWERDOWN_NORMAL, mydac.getPowerDownMode());
+
+    mydac.setPowerDown(DAC8552_POWERDOWN_HIGH_IMP);
+    assertEqual(DAC8552_POWERDOWN_NORMAL, mydac.getPowerDownMode());
+  }
 }
 
 
