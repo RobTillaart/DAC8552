@@ -9,6 +9,7 @@
 
 #include "DAC8552.h"
 
+
 // HW SPI
 DAC8552 mydac(10);
 
@@ -22,6 +23,7 @@ void setup()
   Serial.println(DAC8552_LIB_VERSION);
   mydac.begin();
 }
+
 
 void loop()
 {

@@ -6,24 +6,26 @@
 //     URL: https://github.com/RobTillaart/DAC8552
 //
 // HISTORY:
-//   0.1.0: 2017-12-14  initial version
-//   0.1.1: 2017-12-19  fix begin() bug
-//   0.1.2  2020-04-06  minor refactor, readme.md
-//   0.1.3  2020-06-07  fix library.json
-//   0.2.0  2020-12-18  add arduino-ci + unit test
-//                      add slave select pin for HW constructor
+//  0.1.0: 2017-12-14  initial version
+//  0.1.1: 2017-12-19  fix begin() bug
+//  0.1.2  2020-04-06  minor refactor, readme.md
+//  0.1.3  2020-06-07  fix library.json
+//  0.2.0  2020-12-18  add arduino-ci + unit test
+//                     add slave select pin for HW constructor
 
 
 #include "DAC8552.h"
 
-#define MAXVOLTAGE  5.0
-#define MAXVALUE    0xFFFF
+
+#define MAXVOLTAGE      5.0
+#define MAXVALUE        0xFFFF
 
 DAC8552::DAC8552(uint8_t slaveSelect)
 {
   _hwSPI = true;
   _slaveSelect = slaveSelect;
 }
+
 
 DAC8552::DAC8552(uint8_t spiData, uint8_t spiClock, uint8_t slaveSelect)
 {
@@ -32,6 +34,7 @@ DAC8552::DAC8552(uint8_t spiData, uint8_t spiClock, uint8_t slaveSelect)
   _spiClock = spiClock;
   _slaveSelect = slaveSelect;
 }
+
 
 // initializes the SPI
 // and sets internal state
@@ -60,6 +63,7 @@ void DAC8552::begin()
   }
 }
 
+
 // channel = 0, 1, 2, 3 depending on type
 // value = 0..65535
 void DAC8552::bufferValue(uint8_t channel, uint16_t value)
@@ -67,6 +71,7 @@ void DAC8552::bufferValue(uint8_t channel, uint16_t value)
   _value[channel] = value;
   updateDevice(channel, false);
 }
+
 
 // channel = 0, 1, 2, 3 depending on type
 // value = 0..65535
@@ -76,12 +81,14 @@ void DAC8552::setValue(uint8_t channel, uint16_t value)
   updateDevice(channel, true);
 }
 
+
 // channel = 0, 1, 2, 3 depending on type
 // returns 0..65535
 uint16_t DAC8552::getValue(uint8_t channel)
 {
   return _value[channel];
 }
+
 
 void DAC8552::bufferPowerDown(uint8_t channel, uint8_t powerDownMode)
 {
@@ -90,6 +97,7 @@ void DAC8552::bufferPowerDown(uint8_t channel, uint8_t powerDownMode)
   updateDevice(channel, false);
 }
 
+
 void DAC8552::setPowerDown(uint8_t channel, uint8_t powerDownMode)
 {
   _register[channel] &= 0xFC;
@@ -97,10 +105,12 @@ void DAC8552::setPowerDown(uint8_t channel, uint8_t powerDownMode)
   updateDevice(channel, true);
 }
 
+
 uint8_t DAC8552::getPowerDownMode(uint8_t channel)
 {
   return _register[channel] & 0x03;
 }
+
 
 // channel = 0, 1, 2, 3 depending on type
 // direct = true  ==> write buffers to both channel A and channel B
@@ -129,6 +139,7 @@ void DAC8552::updateDevice(uint8_t channel, bool directWrite)
     digitalWrite(_slaveSelect, HIGH);
   }
 }
+
 
 // simple one mode version
 void DAC8552::swSPI_transfer(uint8_t value)

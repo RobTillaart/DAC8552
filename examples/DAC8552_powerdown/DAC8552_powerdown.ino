@@ -9,6 +9,7 @@
 
 #include "DAC8552.h"
 
+
 //  HW SPI
 DAC8552 mydac(10);
 
@@ -25,6 +26,7 @@ void setup()
   mydac.setValue(chanA, 0);
   mydac.setPowerDown(chanB, DAC8552_POWERDOWN_HIGH_IMP);
 }
+
 
 void loop()
 {

@@ -8,14 +8,19 @@
 //     URL: https://github.com/RobTillaart/DAC8552
 //
 
+
 #include "SPI.h"
+
+
+#define DAC8552_LIB_VERSION           (F("0.2.0"))
+
 
 #define DAC8552_POWERDOWN_NORMAL      0
 #define DAC8552_POWERDOWN_1K          1
 #define DAC8552_POWERDOWN_100K        2
 #define DAC8552_POWERDOWN_HIGH_IMP    3
 
-#define DAC8552_LIB_VERSION           "0.2.0"
+
 
 class DAC8552
 {
