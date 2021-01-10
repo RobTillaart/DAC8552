@@ -42,12 +42,24 @@ unittest(test_HW_constructor)
   DAC8552 mydac(10);
   mydac.begin();
 
+  uint8_t channel = 0;
+  fprintf(stderr, "CHANNEL %d\n", channel);
   for (uint16_t val = 0; val < 65500; val += 30)
   {
-    mydac.setValue(val);
-    if (mydac.getValue() != val)
+    mydac.setValue(channel, val);
+    if (mydac.getValue(channel) != val)
     {
-      fprintf(stderr, "%d -> %d\n", val, mydac.getValue());
+      fprintf(stderr, "%d -> %d\n", val, mydac.getValue(channel));
+    }
+  }
+  channel = 1;
+  fprintf(stderr, "CHANNEL %d\n", channel);
+  for (uint16_t val = 0; val < 65500; val += 30)
+  {
+    mydac.setValue(channel, val);
+    if (mydac.getValue(channel) != val)
+    {
+      fprintf(stderr, "%d -> %d\n", val, mydac.getValue(channel));
     }
   }
   mydac.setValue(100);
@@ -60,12 +72,24 @@ unittest(test_SW_constructor)
   DAC8552 mydac(4, 5, 6);
   mydac.begin();
   
+  uint8_t channel = 0;
+  fprintf(stderr, "CHANNEL %d\n", channel);
   for (uint16_t val = 0; val < 65500; val += 30)
   {
-    mydac.setValue(val);
-    if (mydac.getValue() != val)
+    mydac.setValue(channel, val);
+    if (mydac.getValue(channel) != val)
     {
-      fprintf(stderr, "%d -> %d\n", val, mydac.getValue());
+      fprintf(stderr, "%d -> %d\n", val, mydac.getValue(channel));
+    }
+  }
+  channel = 1;
+  fprintf(stderr, "CHANNEL %d\n", channel);
+  for (uint16_t val = 0; val < 65500; val += 30)
+  {
+    mydac.setValue(channel, val);
+    if (mydac.getValue(channel) != val)
+    {
+      fprintf(stderr, "%d -> %d\n", val, mydac.getValue(channel));
     }
   }
   mydac.setValue(100);
@@ -78,16 +102,16 @@ unittest(test_powerDown)
   DAC8552 mydac(4, 5, 6);
   mydac.begin();
   
-  mydac.setPowerDown(DAC8551_POWERDOWN_NORMAL);
+  mydac.setPowerDown(DAC8552_POWERDOWN_NORMAL);
   assertEqual(DAC8551_POWERDOWN_NORMAL, mydac.getPowerDownMode());
   
-  mydac.setPowerDown(DAC8551_POWERDOWN_1K);
+  mydac.setPowerDown(DAC8552_POWERDOWN_1K);
   assertEqual(DAC8551_POWERDOWN_1K, mydac.getPowerDownMode());
   
-  mydac.setPowerDown(DAC8551_POWERDOWN_100K);
+  mydac.setPowerDown(DAC8552_POWERDOWN_100K);
   assertEqual(DAC8551_POWERDOWN_100K, mydac.getPowerDownMode());
   
-  mydac.setPowerDown(DAC8551_POWERDOWN_HIGH_IMP);
+  mydac.setPowerDown(DAC8552_POWERDOWN_HIGH_IMP);
   assertEqual(DAC8551_POWERDOWN_HIGH_IMP, mydac.getPowerDownMode());
 }
 
