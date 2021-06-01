@@ -12,7 +12,7 @@
 //  0.1.3  2020-06-07  fix library.json
 //  0.2.0  2020-12-18  add arduino-ci + unit test
 //                     add slave select pin for HW constructor
-//  0.2.1  2021-06-02  make it compilable for ESP32
+//  0.2.1  2021-06-02  compile ESP32 + fix for channel B
 
 
 #include "DAC8552.h"
@@ -93,7 +93,7 @@ uint16_t DAC8552::getValue(uint8_t channel)
 void DAC8552::bufferPowerDown(uint8_t channel, uint8_t powerDownMode)
 {
   _register[channel] &= 0xFC;
-  _register[channel] |= powerDownMode;
+  _register[channel] |= (powerDownMode & 0x03);
   updateDevice(channel, false);
 }
 
@@ -101,7 +101,7 @@ void DAC8552::bufferPowerDown(uint8_t channel, uint8_t powerDownMode)
 void DAC8552::setPowerDown(uint8_t channel, uint8_t powerDownMode)
 {
   _register[channel] &= 0xFC;
-  _register[channel] |= powerDownMode;
+  _register[channel] |= (powerDownMode & 0x03);
   updateDevice(channel, true);
 }
 
