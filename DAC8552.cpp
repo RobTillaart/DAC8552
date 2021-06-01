@@ -2,7 +2,7 @@
 //    FILE: DAC8552.cpp 
 //  AUTHOR: Rob Tillaart
 // PURPOSE: Arduino library for DAC8552 SPI Digital Analog Convertor
-// VERSION: 0.2.0
+// VERSION: 0.2.1
 //     URL: https://github.com/RobTillaart/DAC8552
 //
 // HISTORY:
@@ -12,6 +12,7 @@
 //  0.1.3  2020-06-07  fix library.json
 //  0.2.0  2020-12-18  add arduino-ci + unit test
 //                     add slave select pin for HW constructor
+//  0.2.1  2021-06-02  make it compilable for ESP32
 
 
 #include "DAC8552.h"
@@ -56,11 +57,10 @@ void DAC8552::begin()
     digitalWrite(_spiClock, LOW);
   }
 
-  for (uint8_t i = 0; i < 2; i++)
-  {
-    _register[i] = 0;
-    _value[i] = 0;
-  }
+  _value[0] = 0;
+  _value[1] = 0;
+  _register[0] = 0x00;
+  _register[1] = 0x40;
 }
 
 
