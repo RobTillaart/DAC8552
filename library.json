@@ -1,7 +1,7 @@
 {
   "name": "DAC8552",
-  "keywords": "DAC8552, SPI, digital, analog, convertor",
-  "description": "Arduino library for DAC8552 SPI Digital Analog Convertor",
+  "keywords": "DAC8532, DAC8552, SPI, digital, analog, convertor",
+  "description": "Arduino library for DAC8532 and DAC8552 SPI Digital Analog Convertor.",
   "authors":
   [
     {

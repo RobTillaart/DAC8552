@@ -10,10 +10,6 @@
 #include "DAC8552.h"
 
 
-#define MAXVOLTAGE              5.0
-#define MAXVALUE                0xFFFF
-
-
 DAC8552::DAC8552(uint8_t select, __SPI_CLASS__ * spi)
 {
   _select  = select;
