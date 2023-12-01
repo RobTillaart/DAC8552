@@ -74,7 +74,7 @@ protected:
 
 /////////////////////////////////////////////////////////
 //
-// DERIVED DAC8501, DAC8531, DAC8550
+// DERIVED DAC8532
 //
 
 #define DAC8532_POWERDOWN_NORMAL       0
