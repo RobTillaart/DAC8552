@@ -22,7 +22,7 @@
 
 
 #ifndef __SPI_CLASS__
-  //  MBED must be tested befor RP2040
+  //  MBED must be tested before RP2040
   #if defined(ARDUINO_ARCH_MBED)
   #define __SPI_CLASS__   SPIClass
   #elif defined(ARDUINO_ARCH_RP2040)
